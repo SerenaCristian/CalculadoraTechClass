@@ -4,18 +4,19 @@ namespace CalculadoraTechClass
 {
     public class CalculadoraCientifica : CalculadoraBasica
     {
-        
-        public CalculadoraCientifica() : base(0,0,0,0)
+
+        public CalculadoraCientifica(double adicao, double subtracao, double multiplicacao, double divisao) : base(adicao, subtracao, multiplicacao, divisao)
         {
+          
         }
 
-        
+
         public double Potencia(double Numero, double expoente)
         {
             return Math.Pow(Numero, expoente);
         }
 
-        
+
         public double RaizQuadrada(double numero)
         {
             if (numero < 0)
@@ -25,14 +26,6 @@ namespace CalculadoraTechClass
             return Math.Sqrt(numero);
         }
 
-        
-        public double LogaritmoNatural(double numero)
-        {
-            if (numero <= 0)
-            {
-                Console.WriteLine("O logaritmo natural só é definido para números positivos.");
-            }
-            return Math.Log(numero);
-        }
+
     }
 }
