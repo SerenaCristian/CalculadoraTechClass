@@ -1,126 +1,126 @@
-﻿using System;
-using CalculadoraTechClass;
-
-class Program
+﻿namespace CalculadoraTechClass
 {
-    static void Main(string[] args)
+    using CalculadoraTechClass.Enumeradores;
+    using System;
+
+    class Program
     {
-        string sep = new string('.', 50);
-        int op = 0;
-        double valor1, valor2;
-
-        Console.WriteLine(sep);
-        Console.WriteLine("Calculadora Tech Class");
-        Console.WriteLine(sep);
-
-        
-        Console.WriteLine("Escolha o tipo de calculadora:");
-        Console.WriteLine("1 - Calculadora Básica");
-        Console.WriteLine("2 - Calculadora Científica");
-        Console.Write("Digite sua escolha: ");
-        int escolha = int.Parse(Console.ReadLine());
-
-        // Menu de operações
-        Console.WriteLine(sep);
-        Console.WriteLine("1 - Adição");
-        Console.WriteLine("2 - Subtração");
-        Console.WriteLine("3 - Multiplicação");
-        Console.WriteLine("4 - Divisão");
-
-        if (escolha == 2)
+        static void Main(string[] args)
         {
-            Console.WriteLine("5 - Potência");
-            Console.WriteLine("6 - Raiz Quadrada");
-            Console.WriteLine("7 - Logaritmo Natural");
-        }
+            string sep = new string('.', 50);
+            int opcao = -1;
 
-        Console.WriteLine(sep);
-        Console.Write("Selecione a operação que deseja executar: ");
-        op = int.Parse(Console.ReadLine());
-
-        
-        Console.Write("Digite o 1º Valor: ");
-        valor1 = double.Parse(Console.ReadLine());
-
-        Console.Write("Digite o 2º Valor: ");
-        valor2 = double.Parse(Console.ReadLine());
-
-        if (escolha == 1)
-        {
-            CalculadoraBasica calc = new CalculadoraBasica(0,0,0,0);
-
-            switch (op)
+            while (opcao != 0)
             {
-                case 1:
-                    Console.WriteLine($"Adição: {calc.OperacaoAdicao(valor1, valor2)}");
-                    break;
+                Console.WriteLine("Selecione a opção desejada: ");
+                Console.WriteLine(sep);
+                Console.WriteLine("1 - Calculadora");
+                Console.WriteLine("0 - Sair");
 
-                case 2:
-                    Console.WriteLine($"Subtração: {calc.OperacaoSubtracao(valor1, valor2)}");
-                    break;
+                MenuCalculadora MenuPrincipal = Enum.Parse<MenuCalculadora>(Console.ReadLine(), true);
 
-                case 3:
-                    Console.WriteLine($"Multiplicação: {calc.OperacaoMultiplicacao(valor1, valor2)}");
-                    break;
-
-                case 4:
-                    Console.WriteLine($"Divisão: {calc.OperacaoDivisao(valor1, valor2)}");
-                    break;
-
-                default:
-                    Console.WriteLine("Opção inválida! Por favor, selecione uma opção entre 1 e 4.");
-                    break;
+                switch (MenuPrincipal)
+                {
+                    case MenuCalculadora.Calculadora:
+                        ExibirOpcoes();
+                        break;
+                    case MenuCalculadora.Sair:
+                        opcao = 0;
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida. Tente novamente.");
+                        break;
+                }
             }
         }
-        else if (escolha == 2)
+
+        static void ExibirOpcoes()
         {
-            CalculadoraCientifica calcCientifica = new CalculadoraCientifica();
+            int opcao = -1;
 
-            switch (op)
+            while (opcao != 0)
             {
-                case 1:
-                    Console.WriteLine($"Adição: {calcCientifica.OperacaoAdicao(valor1, valor2)}");
-                    break;
+                Console.Clear();
+                Console.WriteLine("Selecione a operação desejada: ");
+                Console.WriteLine(new string('.', 50));
+                Console.WriteLine("1 - Adição");
+                Console.WriteLine("2 - Subtração");
+                Console.WriteLine("3 - Multiplicação");
+                Console.WriteLine("4 - Divisão");
+                Console.WriteLine("5 - Potência");
+                Console.WriteLine("6 - Raiz Quadrada");
+                Console.WriteLine("0 - Voltar");
 
-                case 2:
-                    Console.WriteLine($"Subtração: {calcCientifica.OperacaoSubtracao(valor1, valor2)}");
-                    break;
+                MenuOperacoes MenuOperacao = Enum.Parse<MenuOperacoes>(Console.ReadLine(), true);
 
-                case 3:
-                    Console.WriteLine($"Multiplicação: {calcCientifica.OperacaoMultiplicacao(valor1, valor2)}");
-                    break;
+                double valor1, valor2;
 
-                case 4:
-                    Console.WriteLine($"Divisão: {calcCientifica.OperacaoDivisao(valor1, valor2)}");
-                    break;
+                switch (MenuOperacao)
+                {
+                    case MenuOperacoes.Adicao:
+                        Console.Write("Digite o primeiro valor: ");
+                        valor1 = double.Parse(Console.ReadLine());
+                        Console.Write("Digite o segundo valor: ");
+                        valor2 = double.Parse(Console.ReadLine());
+                        Console.WriteLine("Resultado: " + CalculadoraClass.OperacaoAdicao(valor1, valor2));
+                        Console.ReadKey();
+                        break;
 
-                case 5:
-                    Console.WriteLine($"Potência: {calcCientifica.Potencia(valor1, valor2)}");
-                    break;
+                    case MenuOperacoes.Subtracao:
+                        Console.Write("Digite o primeiro valor: ");
+                        valor1 = double.Parse(Console.ReadLine());
+                        Console.Write("Digite o segundo valor: ");
+                        valor2 = double.Parse(Console.ReadLine());
+                        Console.WriteLine("Resultado: " + CalculadoraClass.OperacaoSubtracao(valor1, valor2));
+                        Console.ReadKey();
+                        break;
 
-                case 6:
-                    Console.WriteLine($"Raiz Quadrada: {calcCientifica.RaizQuadrada(valor1)}");
-                    break;
+                    case MenuOperacoes.Multiplicacao:
+                        Console.Write("Digite o primeiro valor: ");
+                        valor1 = double.Parse(Console.ReadLine());
+                        Console.Write("Digite o segundo valor: ");
+                        valor2 = double.Parse(Console.ReadLine());
+                        Console.WriteLine("Resultado: " + CalculadoraClass.OperacaoMultiplicacao(valor1, valor2));
+                        Console.ReadKey();
+                        break;
 
-                case 7:
-                    Console.WriteLine($"Logaritmo Natural: {calcCientifica.LogaritmoNatural(valor1)}");
-                    break;
+                    case MenuOperacoes.Divisao:
+                        Console.Write("Digite o primeiro valor: ");
+                        valor1 = double.Parse(Console.ReadLine());
+                        Console.Write("Digite o segundo valor: ");
+                        valor2 = double.Parse(Console.ReadLine());
+                        Console.WriteLine("Resultado: " + CalculadoraClass.OperacaoDivisao(valor1, valor2));
+                        Console.ReadKey();
+                        break;
 
-                default:
-                    Console.WriteLine("Opção inválida! Por favor, selecione uma opção válida.");
-                    break;
+                    case MenuOperacoes.Potencia:
+                        Console.Write("Digite a base: ");
+                        valor1 = double.Parse(Console.ReadLine());
+                        Console.Write("Digite o expoente: ");
+                        valor2 = double.Parse(Console.ReadLine());
+                        Console.WriteLine("Resultado: " + CalculadoraClass.OperacaoPotencia(valor1, valor2));
+                        Console.ReadKey();
+                        break;
+
+                    case MenuOperacoes.RaizQuadrada:
+                        Console.Write("Digite o valor: ");
+                        valor1 = double.Parse(Console.ReadLine());
+                        Console.WriteLine("Resultado: " + CalculadoraClass.OperacaoRaizQuadrada(valor1));
+                        Console.ReadKey();
+                        break;
+
+                    case MenuOperacoes.Voltar:
+                        opcao = 0;
+                        break;
+
+                    default:
+                        Console.WriteLine("Opção inválida. Tente novamente.");
+                        Console.ReadKey();
+                        break;
+                }
             }
         }
-        else
-        {
-            Console.WriteLine("Opção inválida! Por favor, selecione 1 ou 2.");
-        }
-
-        Console.WriteLine(sep);
     }
 }
-
-
-
 
 
